@@ -1,18 +1,14 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
-from django.contrib import messages
-from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
-
-
-import logging
-import json
 
 from .populate import initiate
 from .models import CarMake, CarModel
 from .restapis import get_request, analyze_review_sentiments, post_review
+
+import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -115,6 +111,7 @@ def registration(request):
             "error": "Registration failed"
         }, status=500)
 
+
 def get_cars(request):
     count = CarMake.objects.filter().count()
     print(count)
@@ -132,6 +129,7 @@ def get_cars(request):
         })
 
     return JsonResponse({"CarModels": cars})
+
 
 def get_dealerships(request, state="All"):
     if state == "All":
@@ -169,13 +167,20 @@ def get_dealer_reviews(request, dealer_id):
 
 @csrf_exempt
 def add_review(request):
-    if request.user.is_anonymous == False:
+    if not request.user.is_anonymous:
         data = json.loads(request.body)
         try:
             response = post_review(data)
             print(response)
             return JsonResponse({"status": 200})
-        except:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+        except Exception as err:
+            print(f"Unexpected {err=}, {type(err)=}")
+            return JsonResponse({
+                "status": 401,
+                "message": "Error in posting review"
+            })
     else:
-        return JsonResponse({"status": 403, "message": "Unauthorized"})
+        return JsonResponse({
+            "status": 403,
+            "message": "Unauthorized"
+        })
