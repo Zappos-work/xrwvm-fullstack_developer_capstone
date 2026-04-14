@@ -10,15 +10,19 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
+    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/,"
+    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/",
     "https://zapposlucas-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai",
-    "zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai",
+    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://localhost:8000",
+    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/",
+    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/",
     "https://zapposlucas-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai",
-    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai",
+    "https://zapposlucas-8000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/",
 ]
 
 REST_FRAMEWORK = {
